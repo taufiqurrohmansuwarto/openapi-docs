@@ -1,0 +1,193 @@
+{
+  "securityDefinitions": {
+    "CC Master PNS": {
+      "type": "oauth2",
+      "flow": "application",
+      "tokenUrl": "http://siasn.bkd.jatimprov.go.id/oidc-master/token",
+      "description": "Otorisasi untuk melakukan akses ke API untuk vendor / server ke server",
+      "scopes": {
+        "employees-departments": "Dapat mencari pegawai berdasarkan nip pegawai",
+        "department-count": "Mendapat total pegawai per Instansi sesuai dengan kode OPD (Organisasi Perangkat Daerah)"
+      }
+    },
+    "OAuth2 E-MASTER/PNS": {
+      "type": "oauth2",
+      "description": "Otorisasi menggunakan akun E-MASTER / PNS",
+      "flow": "accessCode",
+      "authorizationUrl": "http://siasn.bkd.jatimprov.go.id/oidc-master/auth",
+      "tokenUrl": "http://siasn.bkd.jatimprov.go.id/oidc-master/token",
+      "scopes": {
+        "profile": "Mendapatkan informasi sesuai dengan OpenID Connect",
+        "openid": "Mendapatkan informasi sesuai dengan layer OpenID Connect",
+        "address": "Mendapatkan informasi alamat",
+        "email": "Mendapatkan informasi",
+        "esign": "Dapat melakukan akses tanda tangan elektronik",
+        "offline_access": "Refresh token",
+        "organization:xxx": " Dapat digunakan untuk melakukan akses sesuai dengan kode perangkat daerah",
+        "pegawai:xxx": "Dapat digunakan untuk melakukan akses sesuai jabatan pada pegawai",
+        "read:cv": "Mendapatkan informasi lengkap tentang pegawai yang bersangkutan",
+        "employees-departments": "Mendapatkan informasi setiap pegawai berdasarkan nip pegawai"
+      }
+    },
+    "OAuth2 PTTPK": {
+      "type": "oauth2",
+      "description": "Otorisasi menggunakan akun PTTPK / NON PNS",
+      "flow": "accessCode",
+      "authorizationUrl": "http://siasn.bkd.jatimprov.go.id/oidc-pttpk/auth",
+      "tokenUrl": "http://siasn.bkd.jatimprov.go.id/oidc-pttpk/token",
+      "scopes": {
+        "profile": "Mendapatkan informasi sesuai dengan OpenID Connect",
+        "openid": "Mendapatkan informasi sesuai dengan layer OpenID Connect",
+        "address": "Mendapatkan informasi alamat",
+        "email": "Mendapatkan informasi",
+        "offline_access": "Refresh token"
+      }
+    },
+    "OAuth2 Fasilitator PNS": {
+      "type": "oauth2",
+      "description": "Otorisasi menggunakan akun Fasilitator PNS",
+      "flow": "accessCode",
+      "authorizationUrl": "http://siasn.bkd.jatimprov.go.id/oidc-master-fasilitator/auth",
+      "tokenUrl": "http://siasn.bkd.jatimprov.go.id/oidc-master-fasilitator/token",
+      "scopes": {
+        "profile": "Mendapatkan informasi sesuai dengan OpenID Connect",
+        "openid": "Mendapatkan informasi sesuai dengan layer OpenID Connect",
+        "address": "Mendapatkan informasi alamat",
+        "email": "Mendapatkan informasi",
+        "offline_access": "Refresh token"
+      }
+    },
+    "OAuth2 Fasilitator PTTPK": {
+      "type": "oauth2",
+      "description": "Otorisasi menggunakan akun PTTPK / NON PNS",
+      "flow": "accessCode",
+      "authorizationUrl": "http://siasn.bkd.jatimprov.go.id/oidc-pttpk-fasilitator/auth",
+      "tokenUrl": "http://siasn.bkd.jatimprov.go.id/oidc-pttpk-fasilitator/token",
+      "scopes": {
+        "profile": "Mendapatkan informasi sesuai dengan OpenID Connect",
+        "openid": "Mendapatkan informasi sesuai dengan layer OpenID Connect",
+        "address": "Mendapatkan informasi alamat",
+        "email": "Mendapatkan informasi",
+        "offline_access": "Refresh token"
+      }
+    }
+  },
+  "paths": {
+    "/data/vendor/employees/{employeeNumber}": {
+      "get": {
+        "security": [
+          {
+            "CC Master PNS": ["employees-departments"]
+          }
+        ],
+        "description": "Mendapatkan informasi pegawai per individu berdasarkan nip pegawai",
+        "operationId": "findByEmployeeNumber",
+        "parameters": [
+          {
+            "name": "employeeNumber",
+            "in": "path",
+            "description": "NIP dari pegawai yang akan diambil informasinya",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "404": {
+            "description": "Data pegawai tidak ditemukan"
+          },
+          "400": {
+            "description": "Cek log server"
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Employees"
+              },
+              "example": {
+                "id": 9,
+                "nama": "John Doe",
+                "nik": "08088099980",
+                "perangkat_daerah": "BIDANG YANG MANA SAJA BOLEH",
+                "pangkat": "Pembina",
+                "golongan": "IV/a",
+                "jenis_jabatan": "Jabatan Struktural",
+                "is_eselon": true,
+                "eselon": "IV.a - PENGAWAS",
+                "jabatan": "KEPALA SUB BIDANG",
+                "tmt_pensiun": "2031-04-30T17:00:00.000Z",
+                "bup": 58
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Employees": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "nama": {
+          "type": "string"
+        },
+        "nik": {
+          "type": "string"
+        },
+        "perangkat_daerah": {
+          "type": "string"
+        },
+        "pangkat": {
+          "type": "string"
+        },
+        "golongan": {
+          "type": "string"
+        },
+        "jenis_jabatan": {
+          "type": "string"
+        },
+        "is_eselong": {
+          "type": "boolean"
+        },
+        "eselon": {
+          "type": "string"
+        },
+        "jabatan": {
+          "type": "string"
+        },
+        "tmt_pensiun": {
+          "type": "string"
+        },
+        "bup": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "consumes": ["application/json"],
+  "host": "siasn.bkd.jatimprov.go.id",
+  "basePath": "/pemprov-api",
+  "swagger": "2.0",
+  "schemes": ["http"],
+  "produces": ["application/json"],
+  "info": {
+    "description": "Data Kepegawaian BKD Provinsi Jawa Timur",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0",
+    "termsOfService": "",
+    "title": "API BKD Provinsi Jawa TImur",
+    "contact": {
+      "email": "p3dasi.dev@gmail.com",
+      "name": "Sub Bidang Pengolahan Data dan Sistem Informasi ASN",
+      "url": "https://bkd.jatimprov.go.id"
+    }
+  }
+}
