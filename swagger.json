@@ -74,6 +74,78 @@
     }
   },
   "paths": {
+    "/pttpk/keluarga": {
+      "get": {
+        "tags": ["OAuth PTTPK"],
+        "summary": "Data Keluarga PTTPK",
+        "security": [{ "OAuth2 PTTPK": ["profile"] }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/pttpk/unor": {
+      "get": {
+        "tags": ["OAuth PTTPK"],
+        "summary": "Data Unor PTTPK hasil dalam bentuk tree",
+        "security": [{ "OAuth2 PTTPK": ["profile"] }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/pttpk/jabatan": {
+      "get": {
+        "tags": ["OAuth PTTPK"],
+        "summary": "Data Riwayat Jabatan PTTPK",
+        "security": [{ "OAuth2 PTTPK": ["read:jabatan"] }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/pttpk/unor/{id}": {
+      "get": {
+        "tags": ["OAuth PTTPK"],
+        "summary": "Data Unor PTTPK Seluruh OPD",
+        "security": [{ "OAuth2 PTTPK": ["read:opd"] }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/pttpk-fasilitator/departments": {
+      "get": {
+        "tags": ["OAuth PTTPK Fasilitator"],
+        "summary": "Data Seluruh satuan kerja sesuai dengan satuan kerja fasilitator",
+        "security": [{ "OAuth2 PTTPK": ["profile"] }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/pttpk-fasilitator/employees": {
+      "get": {
+        "tags": ["OAuth PTTPK Fasilitator"],
+        "summary": "Data seluruh pegawai berdasarkan unit kerja dari fasilitator",
+        "security": [{ "OAuth2 PTTPK": ["profile"] }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/master/cv": {
       "get": {
         "summary": "Data Curiculum vitae pegawai PNS",
@@ -353,7 +425,7 @@
       }
     },
     {
-      "name": "OAuth Master PTTPK",
+      "name": "OAuth PTTPK Fasilitator",
       "description": "Otorisasi menggunakna OAuth 2.0 dengan Fasilitator PTTPK",
       "externalDocs": {
         "description": "Untuk lebih lanjut",
