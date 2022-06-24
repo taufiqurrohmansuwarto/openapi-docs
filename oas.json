@@ -1,0 +1,71 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "contact": {
+      "email": "taufiqurrohman.suwarto@gmail.com",
+      "name": "BKD Jatim",
+      "url": "http://bkd.jatimprov.go.id"
+    },
+    "title": "API Kepegawian Pemerintah Provinsi Jawa Timur",
+    "description": "Data Kepegawaian Pemerintah Provinsi Jawa Timur",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0",
+    "termsOfService": "http://bkd.jatimprov.go.id"
+  },
+  "paths": {
+    "/data/vendor/employees/{employeeNumber}": {
+      "get": {
+        "tags": ["Client Credentials Route"],
+        "summary": "Mencari data pegawai (PNS) berdasarkan NIP",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": { "data": "test" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "{scheme}://siasn.bkd.jatimprov.go.id/pemprov-api",
+      "description": "Protected resource",
+      "variables": {
+        "scheme": {
+          "enum": ["http", "https"],
+          "default": "http",
+          "description": "test"
+        }
+      }
+    }
+  ],
+  "components": {},
+  "tags": [
+    {
+      "name": "Client Credentials Route",
+      "description": "Daftar Endpoint untuk client credentials"
+    },
+    {
+      "name": "OAuth Master Route",
+      "description": "Daftar Endpoint untuk OAuth Master (PNS)"
+    },
+    {
+      "name": "OAuth Master Fasilitator Route",
+      "description": "Daftar Endpoint untuk OAuth Master Fasilitator"
+    },
+    {
+      "name": "OAuth PTTPK Route",
+      "description": "Daftar Endpoint untuk OAuth PTTPK"
+    },
+    {
+      "name": "OAuth PTTPK Fasilitator Route",
+      "description": "Daftar Endpoint untuk OAuth PTTPK Fasilitator"
+    }
+  ]
+}
