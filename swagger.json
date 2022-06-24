@@ -75,6 +75,7 @@
   "paths": {
     "/data/vendor/employees/{employeeNumber}": {
       "get": {
+        "tags": ["Vendor"],
         "security": [
           {
             "CC Master PNS": ["employees-departments"]
@@ -176,6 +177,16 @@
   "swagger": "2.0",
   "schemes": ["http"],
   "produces": ["application/json"],
+  "tags": [
+    {
+      "name": "Vendor",
+      "description": "Otorisasi untuk vendor / server yang menggunakan client credentials",
+      "externalDocs": {
+        "description": "Untuk lebih lanjut",
+        "url": "http://bkd.jatimprov.go.id"
+      }
+    }
+  ],
   "info": {
     "description": "Data Kepegawaian BKD Provinsi Jawa Timur",
     "license": {
