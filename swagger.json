@@ -26,7 +26,8 @@
         "organization:xxx": " Dapat digunakan untuk melakukan akses sesuai dengan kode perangkat daerah",
         "pegawai:xxx": "Dapat digunakan untuk melakukan akses sesuai jabatan pada pegawai",
         "read:cv": "Mendapatkan informasi lengkap tentang pegawai yang bersangkutan",
-        "employees-departments": "Mendapatkan informasi setiap pegawai berdasarkan nip pegawai"
+        "employees-departments": "Mendapatkan informasi setiap pegawai berdasarkan nip pegawai",
+        "read:pns": "Mendapatkan informasi akun pegawai lain"
       }
     },
     "OAuth2 PTTPK": {
@@ -73,9 +74,144 @@
     }
   },
   "paths": {
+    "/master/cv": {
+      "get": {
+        "summary": "Data Curiculum vitae pegawai PNS",
+        "security": [
+          {
+            "OAuth2 E-MASTER/PNS": ["read:cv"]
+          }
+        ],
+        "tags": ["OAuth Master"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/master/pegawai/{nip}": {
+      "get": {
+        "description": "Mendapatkan informasi PNS lain",
+        "summary": "Data pegawai lain PNS",
+        "tags": ["OAuth Master"],
+        "security": [{ "OAuth2 E-MASTER/PNS": ["read:pns"] }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/data/vendor/opd-total": {
+      "get": {
+        "description": "Mendapatkan data total pegawai per perangkat daerah",
+        "summary": "Data total pegawai per perangkat daerah",
+        "security": [
+          {
+            "CC Master PNS": ["employees-departments"]
+          }
+        ],
+        "tags": ["Vendor"],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden Error User has No Rights"
+          },
+          "400": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "example": [
+                {
+                  "name": "BIRO PEMERINTAHAN DAN OTONOMI DAERAH",
+                  "id": "1010101",
+                  "pId": "10101",
+                  "total": 60
+                },
+                {
+                  "name": "BIRO PENGADAAN BARANG/JASA",
+                  "id": "1010204",
+                  "pId": "10102",
+                  "total": 58
+                },
+                {
+                  "name": "BIRO PEREKONOMIAN",
+                  "id": "1010201",
+                  "pId": "10102",
+                  "total": 72
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/data/vendor/opd-total-by-parent": {
+      "get": {
+        "tags": ["Vendor"],
+        "security": [
+          {
+            "CC Master PNS": ["department-count"]
+          }
+        ],
+        "summary": "Data total pegawai berdasarkan sub parent Id perangkat Daerah",
+        "description": "Mendapat total pegawai per perangkat daerah berdasarkan pohon OPD (Organisasi Perangkat Daerah), default kalau tidak diisi adalah 1",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "pId",
+            "in": "query",
+            "type": "number",
+            "description": "parentId yang diambl dari id perangkat daerah/bidang/sekolah"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden Error User has No Rights"
+          },
+          "400": {
+            "description": "Cek log server"
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "example": [
+                {
+                  "name": "BIDANG MUTASI",
+                  "id": "12304",
+                  "pId": "123",
+                  "total": 19
+                },
+                {
+                  "name": "BIDANG PEMBINAAN, KESEJAHTERAAN DAN PERLINDUNGAN HUKUM APARATUR SIPIL NEGARA",
+                  "id": "12303",
+                  "pId": "123",
+                  "total": 25
+                },
+                {
+                  "name": "BIDANG PENGEMBANGAN APARATUR SIPIL NEGARA",
+                  "id": "12305",
+                  "pId": "123",
+                  "total": 19
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
     "/data/vendor/employees/{employeeNumber}": {
       "get": {
         "tags": ["Vendor"],
+        "summary": "Data PNS berdasarkan nip pegawai",
         "security": [
           {
             "CC Master PNS": ["employees-departments"]
@@ -94,6 +230,12 @@
         ],
         "produces": ["application/json"],
         "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden Error User has No Rights"
+          },
           "404": {
             "description": "Data pegawai tidak ditemukan"
           },
@@ -108,9 +250,9 @@
                 "$ref": "#/definitions/Employees"
               },
               "example": {
-                "id": 9,
-                "nama": "John Doe",
-                "nik": "08088099980",
+                "id": 17,
+                "nama": "Abdul John Doe",
+                "nik": "123456789",
                 "perangkat_daerah": "BIDANG YANG MANA SAJA BOLEH",
                 "pangkat": "Pembina",
                 "golongan": "IV/a",
@@ -181,6 +323,38 @@
     {
       "name": "Vendor",
       "description": "Otorisasi untuk vendor / server yang menggunakan client credentials",
+      "externalDocs": {
+        "description": "Untuk lebih lanjut",
+        "url": "http://bkd.jatimprov.go.id"
+      }
+    },
+    {
+      "name": "OAuth Master",
+      "description": "Otorisasi menggunakan OAuth 2.0 dengan PNS (Pegawai Negeri Sipil) Pemerintah Provinsi Jawa Timur",
+      "externalDocs": {
+        "description": "Untuk lebih lanjut",
+        "url": "http://bkd.jatimprov.go.id"
+      }
+    },
+    {
+      "name": "OAuth PTTPK",
+      "description": "Otorisasi menggunakan OAuth 2.0 dengan PTTPK (Pegawai Tidak Tetap dengan Perjanjian Kontrak) Pemerintah Provinsi Jawa Timur",
+      "externalDocs": {
+        "description": "Untuk lebih lanjut",
+        "url": "http://bkd.jatimprov.go.id"
+      }
+    },
+    {
+      "name": "OAuth Master Fasilitator",
+      "description": "Otorisasi menggunakan OAuth 2.0 dengan Fasilitator PNS",
+      "externalDocs": {
+        "description": "Untuk lebih lanjut",
+        "url": "http://bkd.jatimprov.go.id"
+      }
+    },
+    {
+      "name": "OAuth Master PTTPK",
+      "description": "Otorisasi menggunakna OAuth 2.0 dengan Fasilitator PTTPK",
       "externalDocs": {
         "description": "Untuk lebih lanjut",
         "url": "http://bkd.jatimprov.go.id"

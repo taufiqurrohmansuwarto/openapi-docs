@@ -1,6 +1,8 @@
 module.exports = {
-  apps : [{
-    name   : "app1",
-    script : "./app.js"
-  }]
-}
+  apps: [
+    {
+      name: "microservices-docs",
+      script: "./app.js",
+    },
+  ],
+};
