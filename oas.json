@@ -1,0 +1,90 @@
+{
+  "components": {
+    "securitySchemes": {
+      "ClientCredentials": {
+        "type": "oauth2",
+        "description": "Sambungan data menggunakan client credentials",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "http://siasn.bkd.jatimprov.go.id/oidc-master/token",
+            "scopes": {
+              "employees-departments": "Melihat data pegawain PNS",
+              "department-count": "Melihat total pegawai per perangkat daerah pemerintah Provinsi Jawa Timur"
+            }
+          }
+        }
+      },
+      "MasterOAuth": {
+        "type": "oauth2",
+        "description": "OAuth 2.0 PNS",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "http://siasn.bkd.jatimprov.go.id/oidc-master/auth",
+            "tokenUrl": "http://siasn.bkd.jatimprov.go.id/oidc-master/token",
+            "scopes": {
+              "read:pns": "test"
+            }
+          }
+        }
+      },
+      "PTTPKOAuth": {
+        "type": "oauth2",
+        "description": "OAuth 2.0 PTTPK",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "http://siasn.bkd.jatimprov.go.id/oidc-pttpk/auth",
+            "tokenUrl": "http://siasn.bkd.jatimprov.go.id/oidc-pttpk/token",
+            "scopes": {
+              "profile": "test"
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [{ "MasterOAuth": ["read:pns"] }],
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "http://siasn.bkd.jatimprov.go.id/pemprov-api",
+      "description": "Alamat Resource Protected (API)"
+    }
+  ],
+  "info": {
+    "title": "API Kepegawaian BKD Provinsi Jawa Timur",
+    "description": "Dokumentasi Integrasi Data Kepegawaian",
+    "version": "1.0",
+    "contact": {
+      "email": "p3dasi.dev@gmail.com",
+      "name": "BKD Jatim",
+      "url": "http://bkd.jatimprov.go.id"
+    }
+  },
+  "paths": {
+    "/data/vendor/employeees/{employeeNumber}": {
+      "get": {
+        "tags": ["Client Credentials"],
+        "security": [{ "ClientCredentials": ["employees-departments"] }],
+        "summary": "Melihat informasi per pegawai berdasarkan NIP",
+        "parameters": [
+          { "name": "NomerIndukPegawai", "required": true, "schema": {} }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Client Credentials",
+      "description": "Integrasi data OAuth 2.0 menggunakan Client Credentials",
+      "externalDocs": {
+        "description": "bisa dilihat di",
+        "url": "http://bkd.jatimprov.go.id"
+      }
+    }
+  ]
+}
