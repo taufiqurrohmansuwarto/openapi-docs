@@ -389,7 +389,7 @@
   "host": "siasn.bkd.jatimprov.go.id",
   "basePath": "/pemprov-api",
   "swagger": "2.0",
-  "schemes": ["http"],
+  "schemes": ["https"],
   "produces": ["application/json"],
   "tags": [
     {
