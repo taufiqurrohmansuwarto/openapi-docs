@@ -1,90 +1,71 @@
 {
-  "components": {
-    "securitySchemes": {
-      "ClientCredentials": {
-        "type": "oauth2",
-        "description": "Sambungan data menggunakan client credentials",
-        "flows": {
-          "clientCredentials": {
-            "tokenUrl": "http://siasn.bkd.jatimprov.go.id/oidc-master/token",
-            "scopes": {
-              "employees-departments": "Melihat data pegawain PNS",
-              "department-count": "Melihat total pegawai per perangkat daerah pemerintah Provinsi Jawa Timur"
-            }
-          }
-        }
-      },
-      "MasterOAuth": {
-        "type": "oauth2",
-        "description": "OAuth 2.0 PNS",
-        "flows": {
-          "authorizationCode": {
-            "authorizationUrl": "http://siasn.bkd.jatimprov.go.id/oidc-master/auth",
-            "tokenUrl": "http://siasn.bkd.jatimprov.go.id/oidc-master/token",
-            "scopes": {
-              "read:pns": "test"
-            }
-          }
-        }
-      },
-      "PTTPKOAuth": {
-        "type": "oauth2",
-        "description": "OAuth 2.0 PTTPK",
-        "flows": {
-          "authorizationCode": {
-            "authorizationUrl": "http://siasn.bkd.jatimprov.go.id/oidc-pttpk/auth",
-            "tokenUrl": "http://siasn.bkd.jatimprov.go.id/oidc-pttpk/token",
-            "scopes": {
-              "profile": "test"
-            }
-          }
-        }
-      }
-    }
-  },
-  "security": [{ "MasterOAuth": ["read:pns"] }],
-  "openapi": "3.0.0",
-  "servers": [
-    {
-      "url": "http://siasn.bkd.jatimprov.go.id/pemprov-api",
-      "description": "Alamat Resource Protected (API)"
-    }
-  ],
+  "openapi": "3.0.1",
   "info": {
-    "title": "API Kepegawaian BKD Provinsi Jawa Timur",
-    "description": "Dokumentasi Integrasi Data Kepegawaian",
-    "version": "1.0",
     "contact": {
-      "email": "p3dasi.dev@gmail.com",
+      "email": "taufiqurrohman.suwarto@gmail.com",
       "name": "BKD Jatim",
       "url": "http://bkd.jatimprov.go.id"
-    }
+    },
+    "title": "API Kepegawian Pemerintah Provinsi Jawa Timur",
+    "description": "Data Kepegawaian Pemerintah Provinsi Jawa Timur",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0",
+    "termsOfService": "http://bkd.jatimprov.go.id"
   },
   "paths": {
-    "/data/vendor/employeees/{employeeNumber}": {
+    "/data/vendor/employees/{employeeNumber}": {
       "get": {
-        "tags": ["Client Credentials"],
-        "security": [{ "ClientCredentials": ["employees-departments"] }],
-        "summary": "Melihat informasi per pegawai berdasarkan NIP",
-        "parameters": [
-          { "name": "NomerIndukPegawai", "required": true, "schema": {} }
-        ],
+        "tags": ["Client Credentials Route"],
+        "summary": "Mencari data pegawai (PNS) berdasarkan NIP",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": { "data": "test" }
+              }
+            }
           }
         }
       }
     }
   },
+  "servers": [
+    {
+      "url": "{scheme}://siasn.bkd.jatimprov.go.id/pemprov-api",
+      "description": "Protected resource",
+      "variables": {
+        "scheme": {
+          "enum": ["http", "https"],
+          "default": "http",
+          "description": "test"
+        }
+      }
+    }
+  ],
+  "components": {},
   "tags": [
     {
-      "name": "Client Credentials",
-      "description": "Integrasi data OAuth 2.0 menggunakan Client Credentials",
-      "externalDocs": {
-        "description": "bisa dilihat di",
-        "url": "http://bkd.jatimprov.go.id"
-      }
+      "name": "Client Credentials Route",
+      "description": "Daftar Endpoint untuk client credentials"
+    },
+    {
+      "name": "OAuth Master Route",
+      "description": "Daftar Endpoint untuk OAuth Master (PNS)"
+    },
+    {
+      "name": "OAuth Master Fasilitator Route",
+      "description": "Daftar Endpoint untuk OAuth Master Fasilitator"
+    },
+    {
+      "name": "OAuth PTTPK Route",
+      "description": "Daftar Endpoint untuk OAuth PTTPK"
+    },
+    {
+      "name": "OAuth PTTPK Fasilitator Route",
+      "description": "Daftar Endpoint untuk OAuth PTTPK Fasilitator"
     }
   ]
 }

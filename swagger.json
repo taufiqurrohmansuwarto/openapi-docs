@@ -3,7 +3,7 @@
     "CC Master PNS": {
       "type": "oauth2",
       "flow": "application",
-      "tokenUrl": "http://siasn.bkd.jatimprov.go.id/oidc-master/token",
+      "tokenUrl": "https://siasn.bkd.jatimprov.go.id/oidc-master/token",
       "description": "Otorisasi untuk melakukan akses ke API untuk vendor / server ke server",
       "scopes": {
         "employees-departments": "Dapat mencari pegawai berdasarkan nip pegawai",
@@ -14,8 +14,8 @@
       "type": "oauth2",
       "description": "Otorisasi menggunakan akun E-MASTER / PNS",
       "flow": "accessCode",
-      "authorizationUrl": "http://siasn.bkd.jatimprov.go.id/oidc-master/auth",
-      "tokenUrl": "http://siasn.bkd.jatimprov.go.id/oidc-master/token",
+      "authorizationUrl": "https://siasn.bkd.jatimprov.go.id/oidc-master/auth",
+      "tokenUrl": "https://siasn.bkd.jatimprov.go.id/oidc-master/token",
       "scopes": {
         "profile": "Mendapatkan informasi sesuai dengan OpenID Connect",
         "openid": "Mendapatkan informasi sesuai dengan layer OpenID Connect",
@@ -34,8 +34,8 @@
       "type": "oauth2",
       "description": "Otorisasi menggunakan akun PTTPK / NON PNS",
       "flow": "accessCode",
-      "authorizationUrl": "http://siasn.bkd.jatimprov.go.id/oidc-pttpk/auth",
-      "tokenUrl": "http://siasn.bkd.jatimprov.go.id/oidc-pttpk/token",
+      "authorizationUrl": "https://siasn.bkd.jatimprov.go.id/oidc-pttpk/auth",
+      "tokenUrl": "https://siasn.bkd.jatimprov.go.id/oidc-pttpk/token",
       "scopes": {
         "profile": "Mendapatkan informasi sesuai dengan OpenID Connect",
         "openid": "Mendapatkan informasi sesuai dengan layer OpenID Connect",
@@ -48,8 +48,8 @@
       "type": "oauth2",
       "description": "Otorisasi menggunakan akun Fasilitator PNS",
       "flow": "accessCode",
-      "authorizationUrl": "http://siasn.bkd.jatimprov.go.id/oidc-master-fasilitator/auth",
-      "tokenUrl": "http://siasn.bkd.jatimprov.go.id/oidc-master-fasilitator/token",
+      "authorizationUrl": "https://siasn.bkd.jatimprov.go.id/oidc-master-fasilitator/auth",
+      "tokenUrl": "https://siasn.bkd.jatimprov.go.id/oidc-master-fasilitator/token",
       "scopes": {
         "profile": "Mendapatkan informasi sesuai dengan OpenID Connect",
         "openid": "Mendapatkan informasi sesuai dengan layer OpenID Connect",
@@ -62,8 +62,8 @@
       "type": "oauth2",
       "description": "Otorisasi menggunakan akun PTTPK / NON PNS",
       "flow": "accessCode",
-      "authorizationUrl": "http://siasn.bkd.jatimprov.go.id/oidc-pttpk-fasilitator/auth",
-      "tokenUrl": "http://siasn.bkd.jatimprov.go.id/oidc-pttpk-fasilitator/token",
+      "authorizationUrl": "https://siasn.bkd.jatimprov.go.id/oidc-pttpk-fasilitator/auth",
+      "tokenUrl": "https://siasn.bkd.jatimprov.go.id/oidc-pttpk-fasilitator/token",
       "scopes": {
         "profile": "Mendapatkan informasi sesuai dengan OpenID Connect",
         "openid": "Mendapatkan informasi sesuai dengan layer OpenID Connect",
