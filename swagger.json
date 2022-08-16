@@ -280,6 +280,58 @@
         }
       }
     },
+    "/web/berita": {
+      "get": {
+        "summary": "List Berita di web BKD Jatim",
+        "tags": ["Public"],
+        "description": "Data berita di web BKD Jatim",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/web/kategori": {
+      "get": {
+        "summary": "List Kategori di web BKD Jatim",
+        "tags": ["Public"],
+        "description": "Data kategori di web BKD Jatim",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/web/banner": {
+      "get": {
+        "summary": "List Banner di web BKD Jatim",
+        "tags": ["Public"],
+        "description": "Data banner di web BKD Jatim",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/web/kegiatan": {
+      "get": {
+        "summary": "Daftar kegiatan di web BKD Jatim",
+        "tags": ["Public"],
+        "description": "Data Kegiatan di web BKD Jatim",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/data/vendor/employees/{employeeNumber}": {
       "get": {
         "tags": ["Vendor"],
@@ -397,6 +449,14 @@
       "description": "Otorisasi untuk vendor / server yang menggunakan client credentials",
       "externalDocs": {
         "description": "Untuk lebih lanjut",
+        "url": "http://bkd.jatimprov.go.id"
+      }
+    },
+    {
+      "name": "public",
+      "description": "public",
+      "externalDocs": {
+        "description": "untuk lebih lanjut",
         "url": "http://bkd.jatimprov.go.id"
       }
     },
