@@ -285,6 +285,22 @@
         "summary": "List Berita di web BKD Jatim",
         "tags": ["Public"],
         "description": "Data berita di web BKD Jatim",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "sortBy",
+            "type": "string",
+            "enum": ["tanggal", "dibaca"]
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "number",
+            "minimum": 1,
+            "default": 1
+          },
+          { "in": "query", "name": "search", "type": "string" }
+        ],
         "produces": ["application/json"],
         "responses": {
           "200": {
