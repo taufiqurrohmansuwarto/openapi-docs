@@ -461,19 +461,19 @@
   "produces": ["application/json"],
   "tags": [
     {
+      "name": "Public",
+      "description": "Public API BKD",
+      "externalDocs": {
+        "description": "Untuk lebih lanjut",
+        "url": "https://bkd.jatimprov.go.id"
+      }
+    },
+    {
       "name": "Vendor",
       "description": "Otorisasi untuk vendor / server yang menggunakan client credentials",
       "externalDocs": {
         "description": "Untuk lebih lanjut",
-        "url": "http://bkd.jatimprov.go.id"
-      }
-    },
-    {
-      "name": "public",
-      "description": "public",
-      "externalDocs": {
-        "description": "untuk lebih lanjut",
-        "url": "http://bkd.jatimprov.go.id"
+        "url": "https://bkd.jatimprov.go.id"
       }
     },
     {
@@ -481,7 +481,7 @@
       "description": "Otorisasi menggunakan OAuth 2.0 dengan PNS (Pegawai Negeri Sipil) Pemerintah Provinsi Jawa Timur",
       "externalDocs": {
         "description": "Untuk lebih lanjut",
-        "url": "http://bkd.jatimprov.go.id"
+        "url": "https://bkd.jatimprov.go.id"
       }
     },
     {
@@ -489,7 +489,7 @@
       "description": "Otorisasi menggunakan OAuth 2.0 dengan PTTPK (Pegawai Tidak Tetap dengan Perjanjian Kontrak) Pemerintah Provinsi Jawa Timur",
       "externalDocs": {
         "description": "Untuk lebih lanjut",
-        "url": "http://bkd.jatimprov.go.id"
+        "url": "https://bkd.jatimprov.go.id"
       }
     },
     {
@@ -497,7 +497,7 @@
       "description": "Otorisasi menggunakan OAuth 2.0 dengan Fasilitator PNS",
       "externalDocs": {
         "description": "Untuk lebih lanjut",
-        "url": "http://bkd.jatimprov.go.id"
+        "url": "https://bkd.jatimprov.go.id"
       }
     },
     {
@@ -505,7 +505,7 @@
       "description": "Otorisasi menggunakna OAuth 2.0 dengan Fasilitator PTTPK",
       "externalDocs": {
         "description": "Untuk lebih lanjut",
-        "url": "http://bkd.jatimprov.go.id"
+        "url": "https://bkd.jatimprov.go.id"
       }
     }
   ],
